@@ -1,0 +1,79 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Learning Log</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+
+  </head>
+
+  <body>
+  <style>
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+    body {
+      background-color: #BFC3C4;
+    }
+    a {
+      color: #DCF763;
+    }
+    a:hover {
+      color: #CAF316;
+    }
+  </style>
+
+  <!-- Static navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">PlcHldr</a>
+      </li>
+    </ul>
+
+        <ul class="nav navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li style="color: #DCF763;">User: {{ user.username }}</li>
+            <p style="color: #DCF763;">&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+            <li><a href="{% url 'users:logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'users:register' %}">Register</a></li>
+            <p style="color: #DCF763;">&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+            <li><a href="{% url 'users:login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="page-header">
+      {% block header %}{% endblock header %}
+    </div>
+    <div>
+      {% block content %}{% endblock content %}
+    </div>
+
+  </div> <!-- /container -->
+  <footer class="py-3 bg-grey footer">
+    <p class="m-0 text-dark text-center ">Copyright &copy; KSego</p>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "learning_logs/base.html" %}
+
+{% block header %}
+  <div class='jumbotron'>
+    <h1 class="display-4">Learning Log: Track your learning</h1>
+    <p class="lead">Built on Django</p>
+    <hr class="my-4">
+    <p>Make topics, make entries, track what you learn</p>
+  </div>
+{% endblock header %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h2>
+    Welcome back, {{ user.username }}.<br><br>
+    View your topics here: <a href="{% url 'learning_logs:topics' %}">Your Topics</a>
+  </h2>
+{% else %}
+  <h2>
+    To begin: <a href="{% url 'users:register' %}">Register</a> or <a href="{% url 'users:login' %}">Login</a>
+  </h2>
+{% endif %}
+{% endblock content %}
